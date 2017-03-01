@@ -8,29 +8,29 @@ public class CartCredentialsCollector {
 
     public String credentailsCollector() throws IOException {
 
-        String test = null;
+        String connectionrequest = null;
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Do you want to connect a new shopping cart ('yes'/'no')");
         String newConnection = bufferedReader.readLine();
         if (newConnection.equals("no")) {
-            //bufferedReader.close();
-        } else {
+        }
+        else {
             System.out.println("Specify your shopping cart. It works with Shopify and Bigcommerce only");
             String newShoppingCart = bufferedReader.readLine();
 
             if (newShoppingCart.equals("Shopify")) {
                 ShopifyCredentialsHandler sch = new ShopifyCredentialsHandler();
-                test = sch.shopifyCredentialsHandler();
+                connectionrequest = sch.shopifyCredentialsHandler();
             }
             else if (newShoppingCart.equals("Bigcommerce")) {
-
+                BigcommerceCredentailsHandler bigcomch = new BigcommerceCredentailsHandler();
+                connectionrequest = bigcomch.bigCommerceCredentialsHandler();
             }
             else {
                 System.out.println("This method works with Shopify. Try to connect a Shopify store.");
-                //bufferedReader.close();
             }
         }
-        return test;
+        return connectionrequest;
     }
 }

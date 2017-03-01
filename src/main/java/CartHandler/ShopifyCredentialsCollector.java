@@ -26,8 +26,6 @@ public class ShopifyCredentialsCollector {
         String newApiPassword = shopifyOauthBufferedReader.readLine();
         ShopifyApiPassword = newApiPassword;
 
-        //shopifyOauthBufferedReader.close();
-
         ArrayList<String> shopifyOauthCredentials = new ArrayList<String>(3);
         shopifyOauthCredentials.add(ShopifyStoreURL);
         shopifyOauthCredentials.add(ShopifyApiKey);
