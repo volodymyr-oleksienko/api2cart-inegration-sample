@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class Product extends SimpleRequest {
+
     public Product(SimpleConnector con) {
         super(con);
     }

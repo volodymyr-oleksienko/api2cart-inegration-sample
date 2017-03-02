@@ -10,7 +10,7 @@ public class EmailSender {
 
     public EmailSender() throws AddressException {
         final String to = "vovazip2@gmail.com";
-        final String too_password = "tlckcuaoxfmrylsm";
+        final String too_password = "test password";
 
         final String from = "vova_zip@i.ua";
 
@@ -33,7 +33,7 @@ public class EmailSender {
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(from));
 
             message.setSubject("From test");
-            String msg = "<div style=\"color:red;\">BRIDGEYE</div>";
+            String msg = "<div style=\"color:red;\">test</div>";
             message.setContent(msg, "text/html; charset=utf-8");
             System.out.println("Start sending an email");
             Transport.send(message);

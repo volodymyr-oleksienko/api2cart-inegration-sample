@@ -1,11 +1,13 @@
 package CartHandler;
 
+import Main.Constants;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class BigcommerceCredentailsHandler {
 
-    final String API_KEY = "cd40010ae9e83dda0143fd304e47b657";
+    String API2CART_KEY = Constants.getApiKey();
     final String A2CURL = "https://api.api2cart.com/v1.0/cart.create.json?";
 
     public String bigCommerceCredentialsHandler() throws IOException {
@@ -25,7 +27,7 @@ public class BigcommerceCredentailsHandler {
         System.out.println("Start with String builder");
         StringBuilder bigCommerceStringBuilder = new StringBuilder();
 
-        bigCommerceStringBuilder.append(A2CURL).append("api_key=").append(API_KEY).append("&cart_id=BigcommerceApi").append("&store_url=").append(BigcommerceUrl)
+        bigCommerceStringBuilder.append(A2CURL).append("api_key=").append(API2CART_KEY).append("&cart_id=BigcommerceApi").append("&store_url=").append(BigcommerceUrl)
                 .append("&AdminAccount=").append(BigcommerceAdminAccount).append("&ApiPath=").append(BigcommerceApiPath).append("&ApiKey=").append(BigcommerceApiKey);
 
         String bigcommerceConnectionApiCall = bigCommerceStringBuilder.toString();

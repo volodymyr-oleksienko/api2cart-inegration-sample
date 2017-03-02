@@ -1,6 +1,7 @@
 package Main;
 
 import CartHandler.CartApiHttpConnector;
+import CartHandler.CartCreateDecoder;
 import CartHandler.CartCredentialsCollector;
 import CartHandler.ShopifyCredentialsHandler;
 import Database.ConnectedCart;
@@ -14,8 +15,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
+
+        String API2CART_KEY = Constants.getApiKey();
 
         //SRetrieve from DB
         DBConnectionWorker dbConnectionWorker = new DBConnectionWorker();
@@ -34,44 +38,25 @@ public class Main {
                 connectedCart.setStore_key(resultSet.getString("store_key"));
 
                 System.out.println(connectedCart);
+                System.out.println(connectedCart.getStore_key());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //API_KEY is a unique for your API2Cart account.
-        final String API_KEY = "cd40010ae9e83dda0143fd304e47b657";
 
         //STORE_KEYS are unique for all connected stores under your account
         //Change your store keys to send a request to another shopping cart
         final String OPENCART_STORE_KEY = "ed58a22dfecb405a50ea3ea56979360d";
         final String WOOCOMMERCE_STORE_KEY = "cfce78a77cc4r46ab02ca75aee5d4398";
 
-        CartApiHttpConnector cartApiConnector = new CartApiHttpConnector();
+        //CartCreate Decoder is used to connect a new shopping cart and retrieve its store key for sending further request to API2Cart
+        CartCreateDecoder ccd = new CartCreateDecoder();
+        ccd.cartCreateDecoder();
 
-        // Allows to add a new shopping cart
-        CartCredentialsCollector ccc = new CartCredentialsCollector();
-
-        //make a request to API2Cart in order to connect a Shopify store
-        String connResponse = cartApiConnector.makeServiceCall(ccc.credentailsCollector());
-        System.out.println("response " + connResponse);
-
-        //decode JSON response
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObj = (JSONObject)parser.parse(connResponse);
-        System.out.println(jsonObj);
-
-        String result = jsonObj.get("result").toString();
-        System.out.println(result);
-
-        //Parse result object
-        JSONObject jsonObj2 = (JSONObject)parser.parse(result);
-
-        //Get generated store_key
-        String storekey = jsonObj2.get("store_key").toString();
-        System.out.print(storekey);
+        String storekey = null;
 
         SimpleConnector connector;
-        connector = new SimpleConnector(storekey, API_KEY);
+        connector = new SimpleConnector(storekey, API2CART_KEY);
         connector.clearLog();
 
         Product product = new Product(connector);

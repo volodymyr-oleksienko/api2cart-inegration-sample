@@ -1,11 +1,13 @@
 package CartHandler;
 
+import Main.Constants;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ShopifyCredentialsHandler {
 
-    final String API_KEY = "cd40010ae9e83dda0143fd304e47b657";
+    String API2CART_KEY = Constants.getApiKey();
     final String A2CURL = "https://api.api2cart.com/v1.0/cart.create.json?";
 
     public String shopifyCredentialsHandler() throws IOException {
@@ -22,7 +24,7 @@ public class ShopifyCredentialsHandler {
         System.out.println("Start with String builder");
         StringBuilder shopifyStringBuilder = new StringBuilder();
 
-        shopifyStringBuilder.append(A2CURL).append("api_key=").append(API_KEY).append("&cart_id=Shopify").append("&store_url=").append(ShopifuUrl)
+        shopifyStringBuilder.append(A2CURL).append("api_key=").append(API2CART_KEY).append("&cart_id=Shopify").append("&store_url=").append(ShopifuUrl)
                 .append("&apiKey=").append(ShopifyKey).append("&apiPassword=").append(ShopifyPassword);
 
         String shopifyConnectionApiCall = shopifyStringBuilder.toString();
