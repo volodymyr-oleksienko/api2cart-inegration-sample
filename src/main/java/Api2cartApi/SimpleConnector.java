@@ -1,4 +1,4 @@
-package Main;
+package Api2cartApi;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -150,7 +150,6 @@ public class SimpleConnector
     }
 
     //Clear log
-
     public void clearLog()
     {
         try {

@@ -1,7 +1,7 @@
-package Main;
+package Api2cartApi;
 
-import Main.SimpleConnector;
-import Main.SimpleRequest;
+import Api2cartApi.SimpleConnector;
+import Api2cartApi.SimpleRequest;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -68,7 +68,7 @@ public class Product extends SimpleRequest {
     }
 
         /**
-     * Main.Product info
+     * Product info
      * id: 32
      * params: force_all (all product fields)
      *

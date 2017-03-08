@@ -8,7 +8,9 @@ import java.io.IOException;
 
 public class CartCreateDecoder {
 
-    public String cartCreateDecoder() throws ParseException, IOException {
+    private String storekey;
+
+    public String cartCreateDecoder() throws Exception {
 
         CartApiHttpConnector cartApiConnector = new CartApiHttpConnector();
 
@@ -21,14 +23,14 @@ public class CartCreateDecoder {
 
         //decode JSON response
         JSONParser parser = new JSONParser();
-        JSONObject jsonObj = (JSONObject)parser.parse(connResponse);
+        JSONObject jsonObj = (JSONObject) parser.parse(connResponse);
         System.out.println(jsonObj);
 
         String result = jsonObj.get("result").toString();
         System.out.println(result);
 
         //Parse result object
-        JSONObject jsonObj2 = (JSONObject)parser.parse(result);
+        JSONObject jsonObj2 = (JSONObject) parser.parse(result);
 
         //Get generated store_key
         String storekey = jsonObj2.get("store_key").toString();

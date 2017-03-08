@@ -1,6 +1,6 @@
-package Main;
+package Api2cartApi;
 
-import Main.SimpleConnector;
+import Api2cartApi.SimpleConnector;
 
 public class SimpleRequest {
 

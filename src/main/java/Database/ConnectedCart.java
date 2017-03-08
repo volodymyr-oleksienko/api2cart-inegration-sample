@@ -7,7 +7,6 @@ public class ConnectedCart {
     private String connected_cart_name;
     private String store_key;
 
-
     public ConnectedCart() {
     }
 

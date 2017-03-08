@@ -14,6 +14,7 @@ public class CartCredentialsCollector {
         System.out.println("Do you want to connect a new shopping cart ('yes'/'no')");
         String newConnection = bufferedReader.readLine();
         if (newConnection.equals("no")) {
+            //return back to main
         }
         else {
             System.out.println("Specify your shopping cart. It works with Shopify and Bigcommerce only");
