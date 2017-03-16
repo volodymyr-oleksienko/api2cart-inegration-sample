@@ -1,16 +1,16 @@
 package Database;
 
-public class ConnectedCart {
+public class DBConnectedCarts {
 
     private int id;
     private String cart_type;
     private String connected_cart_name;
     private String store_key;
 
-    public ConnectedCart() {
+    public DBConnectedCarts() {
     }
 
-    public ConnectedCart(int id, String cart_type, String connected_cart_name, String store_key) {
+    public DBConnectedCarts(int id, String cart_type, String connected_cart_name, String store_key) {
         this.id = id;
         this.cart_type = cart_type;
         this.connected_cart_name = connected_cart_name;

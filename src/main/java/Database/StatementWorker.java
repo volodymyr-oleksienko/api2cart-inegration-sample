@@ -5,12 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StatementWorker {
 
-    String query = "select * from productshopifymain";
+    //Get the list of connected carts from DB
     public void getConnectedCartsStWorker() throws IOException, SQLException {
-
         String query = "select * from connectedcarts";
         DBConnectionWorker dbConnectionWorker = new DBConnectionWorker();
 
@@ -20,7 +21,7 @@ public class StatementWorker {
 
             while (resultSet.next()) {
 
-                ConnectedCart connectedCart = new ConnectedCart();
+                DBConnectedCarts connectedCart = new DBConnectedCarts();
                 connectedCart.setId(resultSet.getInt("id"));
                 connectedCart.setCart_type(resultSet.getString("cart_type"));
                 connectedCart.setConnected_cart_name(resultSet.getString("connected_cart_name"));
@@ -33,9 +34,10 @@ public class StatementWorker {
         }
     }
 
+    //get the list of products in main shopping cart from DB
     public ArrayList<String> getProductsMainStWorker() throws IOException, SQLException {
 
-        String query = "select * from productshopifymain";
+        String query = "select * from productsmain";
         DBConnectionWorker dbConnectionWorker = new DBConnectionWorker();
 
         ArrayList<String> pmain = new ArrayList<String>();
@@ -59,10 +61,10 @@ public class StatementWorker {
         return pmain;
     }
 
-
+    //get the list of products in second shopping cart from DB
     public ArrayList<String> getProductsSecondStWorker() throws IOException, SQLException {
 
-        String query = "select * from productsshopifytwo";
+        String query = "select * from productssecond";
         DBConnectionWorker dbConnectionWorker = new DBConnectionWorker();
 
         ArrayList<String> psecond = new ArrayList<String>();
@@ -85,5 +87,69 @@ public class StatementWorker {
         }
         return psecond;
     }
-}
 
+    //insert products in main shopping cart into DB
+    public void postProductsMainStWorker(ArrayList<HashMap<String, Object>> productMainList) {
+
+        DBConnectionWorker dbConnectionWorker = new DBConnectionWorker();
+        try {
+            Statement statement = dbConnectionWorker.getConnection().createStatement();
+
+            String querymain = "INSERT INTO productsmain (id_in_store, name, price, sku, quantity) ";
+
+            for (Map<String, Object> entry : productMainList) {
+
+                Object id_in_store = entry.get("id_in_store");
+                String name = entry.get("name").toString();
+                Object price = entry.get("price");
+                String sku = entry.get("u_model").toString();
+                Object quantity = entry.get("quantity");
+
+                StringBuilder sb = new StringBuilder();
+                sb.append("VALUES(").append("'" + id_in_store + "',").append("'" + name + "',").append("'" + price + "',")
+                        .append("'" + sku + "',").append("'" + quantity + "')");
+
+                String query = sb.toString();
+                System.out.println("Query test " + query);
+                String query_all = querymain + query;
+                System.out.println("Main " + query_all);
+                statement.executeUpdate(query_all);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //insert products in second shopping cart into DB
+    public void postProductsSecondStWorker(ArrayList<HashMap<String, Object>> productMainList) {
+
+        DBConnectionWorker dbConnectionWorker = new DBConnectionWorker();
+        try {
+            Statement statement = dbConnectionWorker.getConnection().createStatement();
+
+            String querymain = "INSERT INTO productssecond (id_in_store, name, price, sku, quantity) ";
+
+            for (Map<String, Object> entry : productMainList) {
+
+                Object id_in_store = entry.get("id_in_store");
+                String name = entry.get("name").toString();
+                Object price = entry.get("price");
+                String sku = entry.get("u_model").toString();
+                Object quantity = entry.get("quantity");
+
+                StringBuilder sb = new StringBuilder();
+                sb.append("VALUES(").append("'" + id_in_store + "',").append("'" + name + "',").append("'" + price + "',")
+                        .append("'" + sku + "',").append("'" + quantity + "')");
+
+                String query = sb.toString();
+                System.out.println("Query test " + query);
+                String query_all = querymain + query;
+                System.out.println("Main " + query_all);
+                statement.executeUpdate(query_all);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

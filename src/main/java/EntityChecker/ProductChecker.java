@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ProductChecker {
 
-    public static ArrayList<String> productchkr(ArrayList<String> main, ArrayList<String> second){
+    public static ArrayList<String> productChekedList(ArrayList<String> main, ArrayList<String> second){
 
         ArrayList<String> productCheckedList = new ArrayList<String>();
 
@@ -13,7 +13,7 @@ public class ProductChecker {
             for (int j = 0; j < second.size(); j++){
                 String prsecond = second.get(j);
                 if (prmain.equals(prsecond)) {
-                    System.out.println("There are matches");
+                    System.out.println("There is a match");
 
                     productCheckedList.add(prmain);
                 }
